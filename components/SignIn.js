@@ -1,31 +1,56 @@
 import styles from '../styles/components/SignIn.module.css';
-
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { useSignInEmailPassword } from '@nhost/react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Input from './Input';
+import Spinner from './Spinner';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleOnSubmit = e => {
+
+const router = useRouter();
+  const { 
+    signInEmailPassword,
+    isLoading, 
+    isSuccess, 
+    needsEmailVerification, 
+    isError, 
+    error 
+  } = useSignInEmailPassword();
+
+  const handleOnSubmit = async(e) => {
     e.preventDefault();
+    await signInEmailPassword(email, password);
   };
+
+  if( isSuccess){
+    router.push('/');
+    return null
+  }
+
+  const disableForm = isLoading || needsEmailVerification;
 
   return (
     <div className={styles.container}>
       <div className={styles.card}>
         <div className={styles['logo-wrapper']}>
-          <Image src="/logo.svg" alt="logo" layout="fill" objectFit="contain" />
+          {/* <Image src="/logo.svg" alt="logo" layout="fill" objectFit="contain" /> */}
         </div>
-
+    { needsEmailVerification ? (
+      <article>
+        <p> Please check your mailbox and follow the verification link to verify your email.</p>
+      </article> ) : (
         <form onSubmit={handleOnSubmit} className={styles.form}>
           <Input
             type="email"
             label="Email address"
             value={email}
             onChange={e => setEmail(e.target.value)}
+            disabled={disableForm}
             required
           />
           <Input
@@ -33,13 +58,17 @@ const SignIn = () => {
             label="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            disabled={disableForm}
             required
           />
 
-          <button type="submit" className={styles.button}>
-            Sign in
+          <button type="submit" className={styles.button} disabled={disableForm}>
+          {isLoading ? <Spinner size="sm" /> : 'Sign in'}
           </button>
+          {isError ? <p className={styles['error-text']}>{error?.message}</p> : null}
         </form>
+      )
+}
       </div>
 
       <p className={styles.text}>
