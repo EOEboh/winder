@@ -1,0 +1,28 @@
+{
+  "name": "winder",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "@headlessui/react": "^1.6.0",
+    "@heroicons/react": "^1.0.6",
+    "@nhost/nextjs": "^1.7.5",
+    "@nhost/react": "^0.12.5",
+    "@nhost/react-apollo": "^4.7.6",
+    "classnames": "^2.3.1",
+    "graphql": "^16.6.0",
+    "next": "12.1.5",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-hot-toast": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "8.14.0",
+    "eslint-config-next": "12.1.5"
+  }
+}
