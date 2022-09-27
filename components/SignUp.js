@@ -97,6 +97,7 @@ const SignUp = () => {
           <button type="submit" className={styles.button} disabled={disableForm}>
           {isLoading ? <Spinner size="sm" /> : 'Create account'}
           </button>
+          {isError ? `${error?.message}` : null}
         </form>
     )
 }
