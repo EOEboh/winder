@@ -43,10 +43,7 @@ const SignUp = () => {
     return null
   }
 
-  // for error
-  if(isError){
-    alert('Please include correct details')
-  }
+ 
 
   const disableForm = isLoading || needsEmailVerification;
 
