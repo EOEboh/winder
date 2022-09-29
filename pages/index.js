@@ -1,5 +1,7 @@
 import styles from '../styles/pages/Home.module.css';
 import LayoutCard from '../components/LayoutCard';
+import MatchCards from '../components/MatchCards';
+import BottomIcons from '../components/BottomIcons';
 
 import { useUserContext } from '../UserProvider';
 import Head from 'next/head';
@@ -13,10 +15,11 @@ const Home = () => {
   return (
     <Layout>
       <Head>
-        <title>Dashboard - Nhost</title>
+        <title>Winder Home</title>
       </Head>
-      <LayoutCard />
-     sss
+      <MatchCards />
+      <BottomIcons />
+     
     </Layout>
   );
 }
